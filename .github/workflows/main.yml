@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: ["*"]
 
 jobs:
   build:
@@ -12,5 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{github.event.pull_request.head.sha || github.sha}}
       - run: cat README.md
       - run: ls -alt
